@@ -1,0 +1,47 @@
+version: '3.7'
+
+x-app-common: &app-common
+  environment:
+    - SKIP_BUILD
+    - SKIP_RUN
+    - BASE_DIR
+    - PROJECT_DIR
+    - PROJECT_VENDOR_DIR
+    - PROJECT_NAME
+    - PYTHONUNBUFFERED
+  working_dir: /code/
+  volumes:
+    - .:/code/
+  build:
+    context: .
+    dockerfile: docker/python/Dockerfile
+  privileged: true
+  depends_on:
+    - db
+
+services:
+  python-cli:
+    <<: *app-common
+
+  builder:
+    <<: *app-common
+    restart: 'no'
+    entrypoint: /code/docker/python/entrypoint-builder.sh
+
+  backend:
+    <<: *app-common
+    ports:
+      - 8000:8000
+    entrypoint: /code/docker/python/entrypoint.sh
+
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_PASSWORD: mpulse
+      POSTGRES_USER: mpulse
+      PGDATA: /var/lib/postgresql/data/db-files/
+    volumes:
+      - pg_data:/var/lib/postgresql/data/db-files/
+
+volumes:
+  pg_data:
