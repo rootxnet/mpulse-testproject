@@ -14,7 +14,6 @@ staticfiles
 
 # python
 .vendor
-.env
 *.pyc
 .coverage
 htmlcov/
