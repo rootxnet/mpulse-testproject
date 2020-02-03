@@ -2,6 +2,7 @@ import csv
 
 import io
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator, UniqueValidator
 
 from accounts.models import Account
 from .models import Member
@@ -14,8 +15,11 @@ BULK_INSERT_BATCH_SIZE = 200
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(source="member_id")
+    # using explicit validator to enforce uniqueness for redirected field on API level
+    id = serializers.IntegerField(source="member_id",
+                                  validators=[UniqueValidator(queryset=Member.objects.all())])
     account_id = serializers.IntegerField(source="account.id")
+
 
     class Meta:
         model = Member
@@ -28,9 +32,21 @@ class MemberSerializer(serializers.ModelSerializer):
             "client_member_id",
         ]
 
+        # TODO: figure out a way to validate unique together checks with custom ID field
+        # validators = [
+        #     UniqueTogetherValidator(
+        #         queryset=Member.objects.all(),
+        #         fields=["account_id", "client_member_id"]
+        #     ),
+        #     UniqueTogetherValidator(
+        #         queryset=Member.objects.all(),
+        #         fields=["account_id", "phone_number"]
+        #     )
+        # ]
+
+
     def create(self, validated_data):
         account = validated_data.pop("account")
-        print(account)
         validated_data["account"], _ = Account.objects.get_or_create(
             id=account["id"]
         )
