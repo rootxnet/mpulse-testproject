@@ -53,7 +53,6 @@ class BulkMemberCreateListSeralizer(serializers.ListSerializer):
     def create(self, validated_data):
         objects = []
         for item in validated_data:
-            Member.objects.all().delete()
             csv_file = item.pop("csv_file")
             self._all = self._handle_csv_data(csv_file=csv_file)
 
