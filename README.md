@@ -109,7 +109,7 @@ Reponse:
 }
 ```
   
-## /api/v1/members/by-id/<ID>/
+## /api/v1/members/by-id/<MEMBER_ID>/
 
 Get Member by ID
 ```
