@@ -120,6 +120,7 @@ class BulkMemberCreateListSeralizer(serializers.ListSerializer):
 
 class BulkMemberCreateSerializer(serializers.ModelSerializer):
     csv_file = serializers.FileField(write_only=True)
+    id = serializers.SerializerMethodField()
 
     class Meta:
         model = Member
@@ -144,3 +145,9 @@ class BulkMemberCreateSerializer(serializers.ModelSerializer):
         ]
 
         list_serializer_class = BulkMemberCreateListSeralizer
+
+    def get_id(self, obj):
+        """
+        Use member_id instead of real pk for compatibility with API/CSV
+        """
+        return int(obj.member_id)
