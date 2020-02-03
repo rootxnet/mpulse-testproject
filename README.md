@@ -26,11 +26,11 @@ Project is based on Docker containers and is equipped with build scripts that ma
     make purge-all
     ```
 ---
-#API Endpoints
+# API Endpoints
 
 API can be accessed via `http://localhost:8000/api/v1/` URL, available endpoints:
 
-##/api/v1/members/list/
+## /api/v1/members/list/
 
 Creates Member, related Account is automatically created for integrity purposes
 ```
@@ -59,7 +59,7 @@ Response:
 }
 ```
   
-##/api/v1/members/list/
+## /api/v1/members/list/
 
 Fetch all Members
 ```
@@ -89,7 +89,7 @@ Response:
 ]
 ```
   
-##/api/v1/members/by-phone/<PHONE_NUMBER>/
+## /api/v1/members/by-phone/<PHONE_NUMBER>/
 
 Get Member by phone number
 ```
@@ -109,7 +109,7 @@ Reponse:
 }
 ```
   
-##/api/v1/members/by-id/<ID>/
+## /api/v1/members/by-id/<ID>/
 
 Get Member by ID
 ```
@@ -129,7 +129,7 @@ Reponse:
 }
 ```
   
-##/api/v1/members/by-mrn/<MRN>/
+## /api/v1/members/by-mrn/<MRN>/
 
 Get Member by Medical Record Number (MRN)
 ```
@@ -149,7 +149,7 @@ Reponse:
 }
 ```
   
-##/api/v1/members/bulk-create/
+## /api/v1/members/bulk-create/
 
 Upload members via CSV file, This is volume-optimized endpoint, Member creation is done in batches, 
 failures are listed as `failed_ids` and `failed` entries.
@@ -230,7 +230,7 @@ Reponse:
 ```
   
 
-##/api/v1/accounts/<ACCOUNT_ID>/member-list/
+## /api/v1/accounts/<ACCOUNT_ID>/member-list/
 
 Get list of members for given account
 ```
@@ -262,7 +262,7 @@ Reponse:
 ```
 
 
-##/api/v1/accounts/list/
+## /api/v1/accounts/list/
 
 Get list of accounts
 ```
