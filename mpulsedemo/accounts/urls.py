@@ -15,6 +15,6 @@ account_detail = AccountViewSet.as_view({
 })
 
 urlpatterns = [
-    path('list/', account_list, name='account_list'),
-    path('<str:pk>/', account_detail, name='account_detail'),
+    path('api/v1/accounts/list/', account_list, name='account_list'),
+    path('api/v1/accounts/<str:pk>/', account_detail, name='account_detail'),
 ]

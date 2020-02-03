@@ -47,3 +47,12 @@ class MemberViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class MemberListForAccount(viewsets.ModelViewSet):
+    serializer_class = MemberSerializer
+
+    def get_queryset(self):
+        return Member.objects.filter(
+            account__id=self.kwargs.get("pk"),
+        )
