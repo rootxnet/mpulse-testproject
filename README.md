@@ -129,7 +129,7 @@ Reponse:
 }
 ```
   
-## /api/v1/members/by-mrn/<MRN>/
+## /api/v1/members/by-mrn/<MEMBER_MRN>/
 
 Get Member by Medical Record Number (MRN)
 ```
